@@ -105,6 +105,13 @@ with sekme1:
         st.info("Baslamak icin bir goruntu yukleyin.")
 
 with sekme2:
+    # NOT: Canli kamera yalnizca uygulama YEREL calistirildiginda aktiftir.
+    # Streamlit Cloud gibi sunucularda kamera donanimi bulunmadigi icin bu
+    # sekme calismaz; lutfen "Goruntu analizi" sekmesini kullanin.
+    st.info("Canli kamera yalnizca uygulama kendi bilgisayarinizda "
+            "(yerel) calistirildiginda aktiftir. Online demoda lutfen "
+            "'Goruntu analizi' sekmesini kullanin.")
+
     kaynak_tipi = st.radio("Kaynak", ["Webcam", "IP kamera / video"],
                            horizontal=True)
     if kaynak_tipi == "Webcam":
@@ -133,7 +140,8 @@ with sekme2:
         os.makedirs("alarmlar", exist_ok=True)
         cap = cv2.VideoCapture(int(kaynak) if kaynak_tipi == "Webcam" else kaynak)
         if not cap.isOpened():
-            st.error("Kamera acilamadi.")
+            st.error("Kamera acilamadi. (Online demoda bu ozellik "
+                     "calismaz — lutfen 'Goruntu analizi' sekmesini kullanin.)")
             st.session_state.calisiyor = False
         else:
             sayac, son_alarm, kayitlar = 0, 0, []

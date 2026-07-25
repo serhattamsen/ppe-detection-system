@@ -1,41 +1,65 @@
-# ppe-detection-system
-AI-powered PPE (Personal Protective Equipment) detection system - Real-time workplace safety monitoring with YOLO11
 # PPE Detection System
 
-An AI-powered computer vision system that monitors workers' Personal 
-Protective Equipment (PPE) compliance in real time through a web interface.
+**AI-powered Personal Protective Equipment (PPE) detection for workplace safety monitoring, built with YOLO11.**
+
+🔗 **[Live Demo](https://serhat-ppe-detection.streamlit.app)** — try it live by uploading your own workplace image.
+
+---
+
+An AI-powered computer vision system that monitors workers' Personal Protective Equipment (PPE) compliance in real time through a web interface. Upload an image and the system detects safety equipment (or its absence) and flags violations automatically.
+
+<!-- Buraya kendi çektiğin veya telifsiz bir görselle yaptığın tespitin ekran görüntüsünü ekle -->
+<!-- Örnek: ![Demo](docs/demo.png) -->
 
 ## Features
-- YOLO11-based object detection
+
+- YOLO11-based real-time object detection
 - Image, video, and live camera support (webcam / IP camera / RTSP)
-- Detection of hardhat, safety vest, mask, gloves, goggles with violation alerts
+- Detection of hardhat, safety vest, mask, gloves, and goggles, with automatic violation alerts
 - Fall detection
-- Automatic image capture and alarm history on violations
-- Web interface built with Streamlit
+- Ensemble mode: hardhat detection is handled by a dedicated high-accuracy model, while other equipment is detected by a multi-class model
+- Automatic image capture and alarm history when a violation occurs
+- Clean web interface built with Streamlit
 
 ## Models
-| Model | Classes | mAP50 | Description |
-|-------|---------|-------|-------------|
-| baret_model.pt | head, helmet | 0.92 (head) | Hardhat only, high accuracy |
-| kkd_model.pt | 14 classes | 0.73 | YOLO11n, multi-equipment |
-| kkd_model_s.pt | 14 classes | 0.74 | YOLO11s, multi-equipment |
 
-The system supports an ensemble mode where hardhat detection is handled 
-by the dedicated high-accuracy model, while other equipment is detected 
-by the multi-class model.
+| Model            | Classes      | mAP50        | Description                    |
+| ---------------- | ------------ | ------------ | ------------------------------ |
+| `baret_model.pt` | head, helmet | 0.92 (head)  | Hardhat only, high accuracy    |
+| `kkd_model.pt`   | 14 classes   | 0.73         | YOLO11n, multi-equipment       |
+| `kkd_model_s.pt` | 14 classes   | 0.74         | YOLO11s, multi-equipment       |
 
 ## Tech Stack
-Python, Ultralytics YOLO11, OpenCV, Streamlit
 
-## Installation
+Python · Ultralytics YOLO11 · OpenCV · Streamlit · PyTorch
 
+## How It Works
+
+The Streamlit web app runs one or more trained YOLO11 models on the uploaded image. In ensemble mode, a dedicated high-accuracy model detects hardhats while a multi-class model detects the remaining equipment. Detected classes starting with `NO-` (e.g. `NO-Safety Vest`) or matching fall/head states are treated as safety violations and reported with a live compliance summary.
+
+## Getting Started
+
+```bash
+# Install dependencies
 pip install ultralytics streamlit opencv-python
+
+# Run the app
 streamlit run app.py
+```
+
+Then open the local URL shown in the terminal and use the **"Goruntu analizi"** (Image analysis) tab to upload an image.
+
+> **Note:** The live camera tab works only when running locally, since a hosted server has no camera hardware. In the online demo, please use the image-upload tab.
 
 ## Dataset
-Roboflow Universe - PPE Combined Model (CC BY 4.0)
+
+Trained on a subset of ~10,700 images from **Roboflow Universe – PPE Combined Model** (CC BY 4.0).
 
 ## Results
-Trained on a subset of ~10,700 images. The multi-class model performs 
-best on large objects (hardhat, vest), while smaller items (goggles, 
-gloves) show lower accuracy due to class imbalance in the dataset.
+
+The multi-class model performs best on large objects such as hardhats and safety vests, while smaller items (goggles, gloves) show lower accuracy due to class imbalance in the dataset. The dedicated hardhat model reaches high accuracy on head/helmet detection.
+
+## About
+
+Developed as a computer vision project focused on real-time workplace safety monitoring.
+<!-- İstersen kendi katkını ekle, ör: Model training, ensemble logic, and the Streamlit interface were built by me. -->

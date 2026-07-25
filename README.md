@@ -37,6 +37,19 @@ Python · Ultralytics YOLO11 · OpenCV · Streamlit · PyTorch
 
 The Streamlit web app runs one or more trained YOLO11 models on the uploaded image. In ensemble mode, a dedicated high-accuracy model detects hardhats while a multi-class model detects the remaining equipment. Detected classes starting with `NO-` (e.g. `NO-Safety Vest`) or matching fall/head states are treated as safety violations and reported with a live compliance summary.
 
+## Recommended Settings
+
+For the best results in the live demo, use the following settings in the sidebar:
+
+- **Mode (Calisma kipi):** `Birlesik (baret + KKD)` — ensemble mode combines the
+  dedicated high-accuracy hardhat model with the multi-class equipment model.
+- **Confidence threshold (Guven esigi):** `0.35` — a good balance between catching
+  real violations and avoiding false positives.
+- **KKD model:** `kkd_model_s.pt` — the YOLO11s model, which gives the best overall accuracy.
+
+In this configuration, hardhat detection is handled by the dedicated hardhat model,
+while all other equipment (vest, mask, gloves, goggles) is detected by the KKD model.
+
 ## Getting Started
 
 ```bash

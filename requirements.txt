@@ -1,3 +1,6 @@
-ultralytics
 streamlit
+ultralytics
 opencv-python-headless
+pandas
+bcrypt
+Pillow

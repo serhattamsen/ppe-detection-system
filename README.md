@@ -3,9 +3,7 @@
 AI-powered Personal Protective Equipment (PPE) detection for workplace safety 
 monitoring, built with YOLO11.
 
-🔗 **[Live Demo]([https://ppe-detection-system.streamlit.app](https://serhat-ppe-detection.streamlit.app))** — upload a workplace image and see it in action.
-
----
+🔗 **[Live Demo](https://serhat-ppe-detection.streamlit.app)** — upload a workplace image and see it in action.
 
 A computer vision system that monitors workers' PPE compliance through a web 
 interface. It detects safety equipment (or its absence), raises violation 

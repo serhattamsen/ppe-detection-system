@@ -3,7 +3,7 @@
 AI-powered Personal Protective Equipment (PPE) detection for workplace safety 
 monitoring, built with YOLO11.
 
-🔗 **[Live Demo](https://ppe-detection-system.streamlit.app)** — upload a workplace image and see it in action.
+🔗 **[Live Demo]([https://ppe-detection-system.streamlit.app](https://serhat-ppe-detection.streamlit.app))** — upload a workplace image and see it in action.
 
 ---
 
